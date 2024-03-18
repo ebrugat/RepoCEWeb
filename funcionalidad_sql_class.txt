@@ -1,0 +1,9 @@
+FUNCIONALIDAD "Sql" class:
+
+-INSERT --- Andrés
+-READ (VER CONTENIDO) --- Andrés
+-DELETE --- Enric
+-UPDATE --- Enric
+
+çç
+
