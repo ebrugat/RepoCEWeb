@@ -4,6 +4,7 @@
  */
 package control;
 
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,12 +12,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import db.*;
+import model.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
  * @author Mati
  */
-@WebServlet(name = "crear", urlPatterns = {"/crear"})
+@WebServlet(name = "Crear", urlPatterns = {"/Crear"})
 public class Crear extends HttpServlet {
 
     /**
@@ -28,21 +36,18 @@ public class Crear extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet crear</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet crear at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException, ClassNotFoundException, SQLException {
+            response.setContentType("text/html;charset=UTF-8");
+            String nombre = request.getParameter("nombre");
+            RequestDispatcher rd = request.getRequestDispatcher("crearcarrera.jsp");
+            rd.forward(request, response);
+            DbConnect.loadDriver();
+            DbConnect dbConnect = new DbConnect();
+            Connection con = dbConnect.getConexion();
+            Carrera car = new Carrera();
+            Sql controlEscolar = new Sql(car, con);
+            controlEscolar.insertData(con, car.getTable(), car.getColumna1(),nombre);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +62,13 @@ public class Crear extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       try {
+           processRequest(request, response);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
@@ -71,7 +82,13 @@ public class Crear extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       try {
+           processRequest(request, response);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+       } catch (SQLException ex) {
+           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+       }
     }
 
     /**
