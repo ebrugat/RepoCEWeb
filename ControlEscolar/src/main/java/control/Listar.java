@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author Mati
  */
-@WebServlet(name = "Listar", urlPatterns = {"/Listar"})
+@WebServlet(name = "listar", urlPatterns = {"/listar"})
 public class Listar extends HttpServlet {
 
     /**

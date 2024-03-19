@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package db;
+package DAO;
 
 import model.Carrera;
 
@@ -16,13 +16,13 @@ import java.sql.SQLException;
  *
  * @author Mati
  */
-public class Sql {
+public class CarreraDao {
     
     private Carrera car;
     private Connection conexion;
 
-    public Sql(){}
-    public Sql(Carrera car, Connection conexion) {
+    public CarreraDao(){}
+    public CarreraDao(Carrera car, Connection conexion) {
         setCar(car);
         setConexion(conexion);
     }
