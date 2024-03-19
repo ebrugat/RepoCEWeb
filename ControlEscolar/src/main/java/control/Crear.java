@@ -4,28 +4,25 @@
  */
 package control;
 
-import DAO.DbConnect;
 import DAO.CarreraDao;
+import DAO.DbConnect;
 import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import model.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import model.Carrera;
 
 /**
  *
  * @author Mati
  */
-@WebServlet(name = "crear", urlPatterns = {"/crear"})
 public class Crear extends HttpServlet {
 
     /**
@@ -38,21 +35,12 @@ public class Crear extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException, SQLException, ClassNotFoundException {
-        response.setContentType("text/html;charset=UTF-8");
-    	String nombre = request.getParameter("nombre");
-    }
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (SQLException ex) {
-           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        response.setContentType("text/html;charset=UTF-8");
+        RequestDispatcher rd = request.getRequestDispatcher("crearcarrera.jsp");
+        rd.forward(request, response);
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -62,7 +50,11 @@ public class Crear extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -75,13 +67,22 @@ public class Crear extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       try {
-           processRequest(request, response);
-       } catch (ClassNotFoundException ex) {
-           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
-       } catch (SQLException ex) {
-           Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
-       }
+        try {
+            processRequest(request, response);
+            String nombre = request.getParameter("nombre");
+            DbConnect.loadDriver();
+            try (Connection con = new DbConnect().getConexion()) {
+                Carrera car = new Carrera();
+                CarreraDao controlEscolar = new CarreraDao(car, con);  
+                controlEscolar.insertData(con, car.getTable(), car.getColumna1(), nombre);
+            }   catch (SQLException ex) {
+                Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            response.sendRedirect("index.html");
+
+        }   catch (ClassNotFoundException ex) {
+            Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
