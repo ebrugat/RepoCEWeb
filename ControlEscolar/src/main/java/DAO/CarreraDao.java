@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
@@ -41,17 +42,22 @@ public class CarreraDao {
         }
     }
 
-    public void readAndPrintData(String table, String columna, Connection con) {
+    public ArrayList<Carrera> readData(String table, String columna, Connection con) {
+        ArrayList<Carrera> carreras = new ArrayList<>();
         try {
-            String SQLQuery = "SELECT * FROM " +table;
+            String SQLQuery = "SELECT * FROM " + table;
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             ResultSet rs = pt.executeQuery();
             while (rs.next()) {
-                System.out.println("ID: " +rs.getString("id") + " " + columna + ": " +rs.getString(columna));
+                int id = rs.getInt("id");
+                String nombre = rs.getString(columna);
+                Carrera carrera = new Carrera(id, nombre);
+                carreras.add(carrera);
             }
-        } catch (SQLException ex){
-            System.out.println("Error en la adquisición de datos");
+        } catch (SQLException ex) {
+            System.out.println("Error en la adquisición de datos: " + ex.getMessage());
         }
+        return carreras;
     }
 
 
