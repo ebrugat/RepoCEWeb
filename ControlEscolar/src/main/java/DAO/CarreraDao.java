@@ -64,11 +64,11 @@ public class CarreraDao {
     public static void deleteData(String table, int id, Connection con){
         try {
             String SQLQuery = "DELETE FROM " + table + " WHERE id = ?";
-            PreparedStatement pt = con.prepareStatement(SQLQuery);
-            pt.setInt(1, id);
-            pt.executeUpdate();
-            System.out.println("Se ha eliminado la fila correctamente");
-            pt.close();
+            try (PreparedStatement pt = con.prepareStatement(SQLQuery)) {
+                pt.setInt(1, id);
+                pt.executeUpdate();
+                System.out.println("Se ha eliminado la fila correctamente");
+            }
         } catch (SQLException e) {
             System.err.println("Error borrando los datos seleccionados: " + e.getMessage());
         }
@@ -76,12 +76,12 @@ public class CarreraDao {
     public static void updateData(String table, String columna, String nombreAntiguo, String nombreNuevo, Connection con) {
         try {
             String query = "UPDATE " + table + " SET " + columna + " = ? WHERE " + columna + " LIKE ?"; 
-            PreparedStatement pt = con.prepareStatement(query);
-            pt.setString(1, nombreNuevo); 
-            pt.setString(2, nombreAntiguo); 
-            pt.executeUpdate();
-            System.out.println("Datos actualizados correctamente.");
-            pt.close();
+            try (PreparedStatement pt = con.prepareStatement(query)) {
+                pt.setString(1, nombreNuevo);
+                pt.setString(2, nombreAntiguo);
+                pt.executeUpdate();
+                System.out.println("Datos actualizados correctamente.");
+            }
         } catch (SQLException e) {
             System.err.println("Error actualizando los datos: " + e.getMessage());
         }

@@ -37,6 +37,7 @@ public class Listar extends HttpServlet {
             ArrayList<Carrera> carreras = controlEscolar.readData(car.getTable(), car.getColumna1(), con);
             request.setAttribute("carreras", carreras);
             request.getRequestDispatcher("./listar.jsp").forward(request, response);
+            con.close();
         }
     }
 
@@ -52,13 +53,17 @@ public class Listar extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(Listar.class.getName()).log(Level.SEVERE, null, ex);
+        throws ServletException, IOException {
+    String action = request.getParameter("action");
+    if (action != null) {
+        if (action.equals("delete")) {
+            response.sendRedirect(request.getContextPath() + "/borrar");
+        }else if (action.equals("update")) {
+            response.sendRedirect(request.getContextPath() + "/modificar");
         }
     }
+}
+
 
     @Override
     public String getServletInfo() {
