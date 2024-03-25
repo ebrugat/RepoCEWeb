@@ -4,6 +4,7 @@
  */
 package control;
 
+import DAO.CarreraDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,23 +12,39 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Carrera;
 
 /**
  *
- * @author Mati
+ * @author Enric
  */
 @WebServlet(name = "modificar", urlPatterns = {"/modificar"})
 public class Modificar extends HttpServlet {
+ private CarreraDao carreraDao;
+    private Carrera car;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    public Carrera getCar() {
+        return car;
+    }
+
+    public void setCar(Carrera car) {
+        this.car = car;
+    }
+    
+    public CarreraDao getCarreraDao() {
+        return carreraDao;
+    }
+
+    public void setCarreraDao(CarreraDao carreraDao) {
+        this.carreraDao = carreraDao;
+    }
+    @Override
+    public void init(){
+        this.carreraDao = new CarreraDao();
+        this.car = new Carrera();
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
