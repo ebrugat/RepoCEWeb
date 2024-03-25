@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <servlet>
-        <servlet-name>borrar</servlet-name>
-        <servlet-class>control.borrar</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>modificar</servlet-name>
-        <servlet-class>control.modificar</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>borrar</servlet-name>
-        <url-pattern>/borrar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>modificar</servlet-name>
-        <url-pattern>/modificar</url-pattern>
-    </servlet-mapping>
+    
     <error-page>
         <exception-type>java.lang.Exception</exception-type>
         <location>/Error.jsp</location>

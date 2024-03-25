@@ -5,6 +5,7 @@
 package control;
 
 import DAO.CarreraDao;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -48,7 +49,8 @@ public class Borrar extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+            /*RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
+            rp.forward(request,response);*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -63,7 +65,9 @@ public class Borrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            /*RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
+            rp.forward(request,response);*/
+            borrarCarrera(request,response);
     }
 
     /**
@@ -77,17 +81,20 @@ public class Borrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     try {
-         processRequest(request, response);
-         String identifier = request.getParameter("id");
-         int id = Integer.parseInt(identifier);
-         CarreraDao.deleteData(car.getTable(), id);
-         response.sendRedirect("list");
-     } catch (ClassNotFoundException ex) {
-         Logger.getLogger(Borrar.class.getName()).log(Level.SEVERE, null, ex);
+        //borrarCarrera (request,response);
+    }
+    public void borrarCarrera (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+        processRequest(request, response);
+        String identifier = request.getParameter("id");
+        int id = Integer.parseInt(identifier);
+        CarreraDao.deleteData(car.getTable(), id);
+        response.sendRedirect("list");
+       }catch (ClassNotFoundException ex) {
+        Logger.getLogger(Borrar.class.getName()).log(Level.SEVERE, null, ex);
      }
     }
-
     /**
      * Returns a short description of the servlet.
      *

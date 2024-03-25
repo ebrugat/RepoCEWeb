@@ -54,7 +54,7 @@
 							<td><c:out value="${carreras.nombre}" /></td>
 							<td><a href="modificar?id=<c:out value='${carreras.id}'/>">Editar</a>
 								&nbsp;&nbsp;&nbsp;&nbsp; 
-                                                            <a href="borrar?id=<c:out value='${carreras.id}'/>">Borrar</a></td>
+                                                            <a href="/ControlEscolar/borrar?id=<c:out value='${carreras.id}'/>">Borrar</a></td>
 						</tr>
 					</c:forEach>
 					<!-- } -->
