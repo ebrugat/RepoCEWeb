@@ -7,11 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<head>
+    <title>Borrar carrera</title>
+</head>
+<body>
+    <form action="./borrar" method="post">
+        <input type="submit" name="submit" value="Confirmar"/>
+        <input type="submit" name="submit" value="Cancelar"/>
+    </form>
+</body>
 </html>

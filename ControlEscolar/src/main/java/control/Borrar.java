@@ -24,9 +24,18 @@ import model.Carrera;
  */
 @WebServlet(name = "borrar", urlPatterns = {"/borrar"})
 public class Borrar extends HttpServlet {
- private CarreraDao carreraDao;
+    private CarreraDao carreraDao;
     private Carrera car;
+    private int id;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     public Carrera getCar() {
         return car;
     }
@@ -46,12 +55,11 @@ public class Borrar extends HttpServlet {
     public void init(){
         this.carreraDao = new CarreraDao();
         this.car = new Carrera();
+        this.id = 0;
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            /*RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
-            rp.forward(request,response);*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -66,9 +74,11 @@ public class Borrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            /*RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
-            rp.forward(request,response);*/
-            borrarCarrera(request,response);
+        processRequest(request, response);
+        String identifier = request.getParameter("id");
+        setId(Integer.parseInt(identifier));
+        RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
+        rp.forward(request,response);
     }
 
     /**
@@ -82,14 +92,17 @@ public class Borrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //borrarCarrera (request,response);
+        String action = request.getParameter("submit");
+            if(action.equals("Confirmar")){
+                borrarCarrera(request,response);
+            }
+            else{
+                response.sendRedirect("list");
+            }
     }
     public void borrarCarrera (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        processRequest(request, response);
-        String identifier = request.getParameter("id");
-        int id = Integer.parseInt(identifier);
         CarreraDao.deleteData(car.getTable(), id);
         response.sendRedirect("list");
        }catch (ClassNotFoundException ex) {
