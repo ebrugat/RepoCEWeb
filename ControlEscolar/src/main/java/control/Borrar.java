@@ -16,10 +16,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.Carrera;
 /**
  *
  * @author Mati
@@ -81,16 +79,17 @@ public class Borrar extends HttpServlet {
                 }   catch (SQLException ex) {
                     Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                response.sendRedirect("http://localhost:8080/ControlEscolar/listar");
+                response.sendRedirect(request.getContextPath() + "/listar");
             }   catch (ClassNotFoundException ex) {
                 Logger.getLogger(Borrar.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
             else{
-                response.sendRedirect("http://localhost:8080/ControlEscolar/listar");
+                response.sendRedirect(request.getContextPath() + "/listar");
             }
         }
-        response.sendRedirect("http://localhost:8080/ControlEscolar/listar");
+        response.sendRedirect(request.getContextPath() + "/listar");
+
     }
 
     /**
