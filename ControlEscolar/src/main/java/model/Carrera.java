@@ -23,6 +23,9 @@ public class Carrera{
         setTable(TABLE_NAME);
         setColumna1(COLUMN_NAME_1);
     }
+    public Carrera (String nombrep){
+        this.nombre = nombrep;
+    }
     public Carrera(int idp, String nombrep){
         setId(idp);
         setNombre(nombrep);

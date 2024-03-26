@@ -1,24 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="6.0" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd">
-    <servlet>
-        <servlet-name>crear</servlet-name>
-        <servlet-class>control.Crear</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Crear</servlet-name>
-        <servlet-class>control.Crear</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>crear</servlet-name>
-        <url-pattern>/crear</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Crear</servlet-name>
-        <url-pattern>/Crear</url-pattern>
-    </servlet-mapping>
-    <session-config>
-        <session-timeout>
-            30
-        </session-timeout>
-    </session-config>
+    
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/Error.jsp</location>
+    </error-page>
 </web-app>

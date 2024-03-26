@@ -21,16 +21,20 @@ public class CarreraDao {
     
     private Carrera car;
     private Connection conexion;
-
+    
     public CarreraDao(){}
     public CarreraDao(Carrera car, Connection conexion) {
         setCar(car);
         setConexion(conexion);
     }
+    public CarreraDao(Carrera car) {
+        setCar(car);
+    }
 
-
-    public void insertData(Connection con, String table, String columna, String inputCarrera) {
+    public void insertData(String table, String columna, String inputCarrera) throws ClassNotFoundException {
         try {
+            DbConnect.loadDriver();
+            Connection con = new DbConnect().getConexion();
             String SQLQuery = "INSERT INTO " + table + " (" + columna + ") VALUES (?)";
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             pt.setString(1, inputCarrera);
@@ -42,9 +46,11 @@ public class CarreraDao {
         }
     }
 
-    public ArrayList<Carrera> readData(String table, String columna, Connection con) {
+    public ArrayList<Carrera> readData(String table, String columna) throws ClassNotFoundException {
         ArrayList<Carrera> carreras = new ArrayList<>();
         try {
+            DbConnect.loadDriver();
+            Connection con = new DbConnect().getConexion();
             String SQLQuery = "SELECT * FROM " + table;
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             ResultSet rs = pt.executeQuery();
@@ -61,20 +67,23 @@ public class CarreraDao {
     }
 
 
-    public static void deleteData(String table, int id, Connection con){
+    public static void deleteData(String table, int id) throws ClassNotFoundException{
         try {
-            String SQLQuery = "DELETE FROM " + table + " WHERE id = ?";
+            DbConnect.loadDriver();
+            Connection con = new DbConnect().getConexion();
+            String SQLQuery = "DELETE FROM " + table + " WHERE id = ?;";
             try (PreparedStatement pt = con.prepareStatement(SQLQuery)) {
                 pt.setInt(1, id);
                 pt.executeUpdate();
-                System.out.println("Se ha eliminado la fila correctamente");
             }
         } catch (SQLException e) {
             System.err.println("Error borrando los datos seleccionados: " + e.getMessage());
         }
     }
-    public static void updateData(String table, String columna, String nombreAntiguo, String nombreNuevo, Connection con) {
+    public static void updateData(String table, String columna, String nombreAntiguo, String nombreNuevo) throws ClassNotFoundException {
         try {
+            DbConnect.loadDriver();
+            Connection con = new DbConnect().getConexion();
             String query = "UPDATE " + table + " SET " + columna + " = ? WHERE " + columna + " LIKE ?"; 
             try (PreparedStatement pt = con.prepareStatement(query)) {
                 pt.setString(1, nombreNuevo);
@@ -100,6 +109,6 @@ public class CarreraDao {
     }
             
     public void setConexion(Connection conexion) {
-        this.conexion = conexion;
+        this.conexion =  conexion;
     }
 }

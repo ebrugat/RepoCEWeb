@@ -5,7 +5,7 @@
 package control;
 
 import DAO.CarreraDao;
-import DAO.DbConnect;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -22,51 +21,88 @@ import model.Carrera;
 
 /**
  *
- * @author Mati
+ * @author Enric
  */
-@WebServlet(name = "listar", urlPatterns = {"/listar"})
+@WebServlet(name = "lista", urlPatterns = {"/"})
 public class Listar extends HttpServlet {
+    private CarreraDao carreraDao;
+    private Carrera car;
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ClassNotFoundException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-        DbConnect.loadDriver();
-        try (Connection con = new DbConnect().getConexion()) {
-            Carrera car = new Carrera();
-            CarreraDao controlEscolar = new CarreraDao(car, con);  
-            ArrayList<Carrera> carreras = controlEscolar.readData(car.getTable(), car.getColumna1(), con);
-            request.setAttribute("carreras", carreras);
-            request.getRequestDispatcher("./listar.jsp").forward(request, response);
-            con.close();
-        }
+    public Carrera getCar() {
+        return car;
     }
 
+    public void setCar(Carrera car) {
+        this.car = car;
+    }
+    
+    public CarreraDao getCarreraDao() {
+        return carreraDao;
+    }
+
+    public void setCarreraDao(CarreraDao carreraDao) {
+        this.carreraDao = carreraDao;
+    }
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    public void init(){
+        this.carreraDao = new CarreraDao();
+        this.car = new Carrera();
+    }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        this.doGet(request, response);
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException{
+        String action = request.getServletPath();
         try {
-            processRequest(request, response);
-        } catch (ClassNotFoundException | SQLException ex) {
+        	switch (action) {
+        	case "/nuevo":
+        		showNewForm(request, response);
+        		break;
+        	case "/crear":
+        		insertarCarrera(request, response);
+        		break;
+        	/*case "/borrar":
+        		borrarCarrera(request, response);
+        		break;*/
+        	case "/modificar":
+        		//showEditForm(request, response);
+        		break;
+        	default:
+        		listCarrera(request, response);
+        		break;
+        	}
+        } catch (ClassNotFoundException ex) {
             Logger.getLogger(Listar.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-    String action = request.getParameter("action");
-    if (action != null) {
-        if (action.equals("delete")) {
-            response.sendRedirect(request.getContextPath() + "/borrar");
-        }else if (action.equals("update")) {
-            response.sendRedirect(request.getContextPath() + "/modificar");
-        }
+     private void listCarrera(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException{
+            ArrayList<Carrera> carreras = carreraDao.readData(car.getTable(), car.getColumna1());
+            request.setAttribute("carreras", carreras);
+            RequestDispatcher rp = request.getRequestDispatcher("carreras-lista.jsp");
+            rp.forward(request,response);
     }
-}
-
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+    private void showNewForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        RequestDispatcher rp = request.getRequestDispatcher("carrera-form.jsp");
+        rp.forward(request,response);
+    }
+    /*private void borrarCarrera(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ClassNotFoundException{
+        String identifier = request.getParameter("id");
+        int id = Integer.parseInt(identifier);
+        CarreraDao.deleteData(car.getTable(), id);
+        response.sendRedirect("list");
+    }*/
+    private void insertarCarrera(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ClassNotFoundException{
+        String nombre = request.getParameter("nombre");
+        Carrera nuevaCarrera = new Carrera(nombre);
+        carreraDao.insertData(car.getTable(), car.getColumna1(), nuevaCarrera.getNombre());
+        response.sendRedirect("list");
     }
 }
