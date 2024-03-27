@@ -5,6 +5,7 @@
 package control;
 
 import DAO.CarreraDao;
+import jakarta.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -58,6 +59,10 @@ public class Modificar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String identifier = request.getParameter("id");
+        setId(Integer.parseInt(identifier));
+        RequestDispatcher rp = request.getRequestDispatcher("modificar.jsp");
+        rp.forward(request,response);
     }
 
     /**
@@ -71,6 +76,17 @@ public class Modificar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            updateCarrera(request,response);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Modificar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void updateCarrera(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException{
+        String nuevoNombre = request.getParameter("nombre");
+            CarreraDao.updateData(id, nuevoNombre);
+            response.sendRedirect("list");
     }
 
     /**

@@ -52,7 +52,7 @@ public class Crear extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher rp = request.getRequestDispatcher("carrera-form.jsp");
+        RequestDispatcher rp = request.getRequestDispatcher("crear.jsp");
         rp.forward(request,response);
     }
     

@@ -71,7 +71,7 @@ public class CarreraDao {
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "DELETE FROM carreras WHERE id = ?";;
+            String SQLQuery = "DELETE FROM " + "carreras" + " WHERE id = ?;";
             try (PreparedStatement pt = con.prepareStatement(SQLQuery)) {
                 pt.setInt(1, id);
                 pt.executeUpdate();
@@ -80,16 +80,15 @@ public class CarreraDao {
             System.err.println("Error borrando los datos seleccionados: " + e.getMessage());
         }
     }
-    public static void updateData(String table, String columna, String nombreAntiguo, String nombreNuevo) throws ClassNotFoundException {
+    public static void updateData(int id, String nombreNuevo) throws ClassNotFoundException {
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String query = "UPDATE " + table + " SET " + columna + " = ? WHERE " + columna + " LIKE ?"; 
+            String query = "UPDATE carreras SET nombre = ? WHERE id = ? "; 
             try (PreparedStatement pt = con.prepareStatement(query)) {
                 pt.setString(1, nombreNuevo);
-                pt.setString(2, nombreAntiguo);
+                pt.setInt(2, id);
                 pt.executeUpdate();
-                System.out.println("Datos actualizados correctamente.");
             }
         } catch (SQLException e) {
             System.err.println("Error actualizando los datos: " + e.getMessage());

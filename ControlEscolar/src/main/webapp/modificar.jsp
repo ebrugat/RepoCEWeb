@@ -27,32 +27,17 @@
 	<br>
 	<div class="container col-md-5">
 		<div class="card">
-			<div class="card-body">
-				<c:if test="${carreras != null}">
-					<form action="modificar" method="post">
-				</c:if>
-				<c:if test="${carreras == null}">
-					<form action="crear" method="post">
-				</c:if>
-
-				<caption>
-					<h2>
-						<c:if test="${carreras != null}">
-            			Editar carrera
-            		</c:if>
-						<c:if test="${carreras == null}">
-            			Añadir nueva carrera
-            		</c:if>
+			<div class="card-body">				
+                            <form action="modificar" method="post">
+                                <caption>
+                                    <h2>						
+            			Editar Carrera seleccionada
 					</h2>
 				</caption>
-
-				<c:if test="${carreras != null}">
-					<input type="hidden" name="id" value="<c:out value='${carreras.id}' />" />
-				</c:if>
-
+					
 				<fieldset class="form-group">
-					<label>Nombre carrera</label> <input type="text"
-						value="<c:out value='${carreras.nombre}' />" class="form-control"
+					<label>Nuevo nombre</label> <input type="text"
+                                                class="form-control"
 						name="nombre" required="required">
 				</fieldset>
 				<button type="submit" class="btn btn-success">Guardar</button>
