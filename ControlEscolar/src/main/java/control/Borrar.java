@@ -57,10 +57,6 @@ public class Borrar extends HttpServlet {
         this.car = new Carrera();
         this.id = 0;
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -74,7 +70,6 @@ public class Borrar extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         String identifier = request.getParameter("id");
         setId(Integer.parseInt(identifier));
         RequestDispatcher rp = request.getRequestDispatcher("deletemenu.jsp");
@@ -118,5 +113,4 @@ public class Borrar extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

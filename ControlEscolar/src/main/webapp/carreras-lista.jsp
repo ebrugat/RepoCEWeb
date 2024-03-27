@@ -15,8 +15,7 @@
 		<nav class="navbar navbar-expand-md navbar-dark"
 			style="background-color: tomato">
 			<div>
-				<a href="<%=request.getContextPath()%>/list" class="navbar-brand"> Carreras
-					Management App </a>
+				<a href="<%=request.getContextPath()%>/list" class="navbar-brand"> Carrera Management App </a>
 			</div>
 
 			<ul class="navbar-nav">
@@ -35,7 +34,7 @@
 			<hr>
 			<div class="container text-left">
 
-				<a href="<%=request.getContextPath()%>/nuevo" class="btn btn-success">Añadir Nueva Carrera</a>
+				<a href="<%=request.getContextPath()%>/crear" class="btn btn-success">Añadir Nueva Carrera</a>
 			</div>
 			<br>
 			<table class="table table-bordered">
