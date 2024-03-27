@@ -4,40 +4,35 @@
 <html>
 <head>
 <title>Carrera Management Application</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link>
 </head>
 <body>
 
 	<header>
-		<nav class="navbar navbar-expand-md navbar-dark"
-			style="background-color: tomato">
+		<nav>
 			<div>
-				<a href="<%=request.getContextPath()%>/list" class="navbar-brand"> Carrera Management App </a>
+				<a href="<%=request.getContextPath()%>/list"> Carrera Management App </a>
 			</div>
 
-			<ul class="navbar-nav">
-				<li><a href="<%=request.getContextPath()%>/list"
-					class="nav-link">Carreras</a></li>
+			<ul>
+				<li><a href="<%=request.getContextPath()%>/list"> Carreras</a></li>
 			</ul>
 		</nav>
 	</header>
 	<br>
 
-	<div class="row">
+	<div>
 		<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
 
-		<div class="container">
-			<h3 class="text-center">Lista de Carreras</h3>
+		<div>
+			<h3>Lista de Carreras</h3>
 			<hr>
-			<div class="container text-left">
+			<div>
 
-				<a href="<%=request.getContextPath()%>/crear" class="btn btn-success">Añadir Nueva Carrera</a>
+				<a href="<%=request.getContextPath()%>/crear">Añadir Nueva Carrera</a>
 			</div>
 			<br>
-			<table class="table table-bordered">
+			<table>
 				<thead>
 					<tr>
 						<th>ID</th>

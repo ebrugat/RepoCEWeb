@@ -83,7 +83,8 @@ public class Modificar extends HttpServlet {
         }
     }
     
-    private void updateCarrera(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException{
+    private void updateCarrera(HttpServletRequest request, HttpServletResponse response) 
+            throws IOException, ClassNotFoundException{
         String nuevoNombre = request.getParameter("nombre");
             CarreraDao.updateData(id, nuevoNombre);
             response.sendRedirect("list");
