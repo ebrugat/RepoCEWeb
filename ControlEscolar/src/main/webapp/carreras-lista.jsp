@@ -43,7 +43,7 @@
                                 <td><%= carrera.getId() %></td>
                                 <td><%= carrera.getNombre() %></td>
                                 <td>
-                                    <a href="modificar?id=<%= carrera.getId() %>">Editar</a>
+                                    <a href="/ControlEscolar/modificar?id=<%= carrera.getId() %>">Editar</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; 
                                     <a href="/ControlEscolar/borrar?id=<%= carrera.getId() %>">Borrar</a>
                                 </td>
