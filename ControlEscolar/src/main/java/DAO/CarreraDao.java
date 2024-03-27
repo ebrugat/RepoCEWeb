@@ -31,11 +31,11 @@ public class CarreraDao {
         setCar(car);
     }
 
-    public void insertData(String table, String columna, String inputCarrera) throws ClassNotFoundException {
+    public void insertData(String inputCarrera) throws ClassNotFoundException {
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "INSERT INTO " + table + " (" + columna + ") VALUES (?)";
+            String SQLQuery = "INSERT INTO carreras" + " (nombre) VALUES" + "(?);";
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             pt.setString(1, inputCarrera);
             pt.executeUpdate();
@@ -46,17 +46,17 @@ public class CarreraDao {
         }
     }
 
-    public ArrayList<Carrera> readData(String table, String columna) throws ClassNotFoundException {
+    public ArrayList<Carrera> readData() throws ClassNotFoundException {
         ArrayList<Carrera> carreras = new ArrayList<>();
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "SELECT * FROM " + table;
+            String SQLQuery = "SELECT * FROM carreras";
             PreparedStatement pt = con.prepareStatement(SQLQuery);
             ResultSet rs = pt.executeQuery();
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String nombre = rs.getString(columna);
+                String nombre = rs.getString("nombre");
                 Carrera carrera = new Carrera(id, nombre);
                 carreras.add(carrera);
             }
@@ -67,11 +67,11 @@ public class CarreraDao {
     }
 
 
-    public static void deleteData(String table, int id) throws ClassNotFoundException{
+    public static void deleteData(int id) throws ClassNotFoundException{
         try {
             DbConnect.loadDriver();
             Connection con = new DbConnect().getConexion();
-            String SQLQuery = "DELETE FROM " + table + " WHERE id = ?;";
+            String SQLQuery = "DELETE FROM carreras WHERE id = ?";;
             try (PreparedStatement pt = con.prepareStatement(SQLQuery)) {
                 pt.setInt(1, id);
                 pt.executeUpdate();

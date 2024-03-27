@@ -25,7 +25,6 @@ import model.Carrera;
 @WebServlet(name = "borrar", urlPatterns = {"/borrar"})
 public class Borrar extends HttpServlet {
     private CarreraDao carreraDao;
-    private Carrera car;
     private int id;
 
     public int getId() {
@@ -35,15 +34,7 @@ public class Borrar extends HttpServlet {
     public void setId(int id) {
         this.id = id;
     }
-    
-    public Carrera getCar() {
-        return car;
-    }
-
-    public void setCar(Carrera car) {
-        this.car = car;
-    }
-    
+        
     public CarreraDao getCarreraDao() {
         return carreraDao;
     }
@@ -54,7 +45,6 @@ public class Borrar extends HttpServlet {
     @Override
     public void init(){
         this.carreraDao = new CarreraDao();
-        this.car = new Carrera();
         this.id = 0;
     }
 
@@ -98,7 +88,7 @@ public class Borrar extends HttpServlet {
     public void borrarCarrera (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        CarreraDao.deleteData(car.getTable(), id);
+        CarreraDao.deleteData(id);
         response.sendRedirect("list");
        }catch (ClassNotFoundException ex) {
         Logger.getLogger(Borrar.class.getName()).log(Level.SEVERE, null, ex);

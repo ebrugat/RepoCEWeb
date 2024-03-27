@@ -63,7 +63,7 @@ public class Listar extends HttpServlet {
     }
     private void listCarrera(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException{
-            ArrayList<Carrera> carreras = carreraDao.readData(car.getTable(), car.getColumna1());
+            ArrayList<Carrera> carreras = carreraDao.readData();
             request.setAttribute("carreras", carreras);
             RequestDispatcher rp = request.getRequestDispatcher("carreras-lista.jsp");
             rp.forward(request,response);

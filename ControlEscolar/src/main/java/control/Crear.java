@@ -59,18 +59,18 @@ public class Crear extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        /*try {
+        try{
             insertarCarrera(request,response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Crear.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
     }
     
     private void insertarCarrera(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ClassNotFoundException{
         String nombre = request.getParameter("nombre");
         Carrera nuevaCarrera = new Carrera(nombre);
-        carreraDao.insertData(car.getTable(), car.getColumna1(), nuevaCarrera.getNombre());
+        carreraDao.insertData(nuevaCarrera.getNombre());
         response.sendRedirect("list");
     }
     /**

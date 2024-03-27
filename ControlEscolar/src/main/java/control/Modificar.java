@@ -22,15 +22,15 @@ import model.Carrera;
  */
 @WebServlet(name = "modificar", urlPatterns = {"/modificar"})
 public class Modificar extends HttpServlet {
- private CarreraDao carreraDao;
-    private Carrera car;
+    private CarreraDao carreraDao;
+    private int id;
 
-    public Carrera getCar() {
-        return car;
+    public int getId() {
+        return id;
     }
 
-    public void setCar(Carrera car) {
-        this.car = car;
+    public void setId(int id) {
+        this.id = id;
     }
     
     public CarreraDao getCarreraDao() {
@@ -43,7 +43,7 @@ public class Modificar extends HttpServlet {
     @Override
     public void init(){
         this.carreraDao = new CarreraDao();
-        this.car = new Carrera();
+        this.id = 0;
     }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
