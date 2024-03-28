@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>Carrera Management Application</title>
+<title>Crear</title>
 <link>
 </head>
 <body>
@@ -10,7 +10,7 @@
 	<header>
 		<nav>
 			<div>
-				<a href="<%=request.getContextPath()%>/list"> Carrera Management App </a>
+				<a href="<%=request.getContextPath()%>">Home</a>
 			</div>
 
 			<ul>

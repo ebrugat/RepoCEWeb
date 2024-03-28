@@ -3,13 +3,13 @@
 <%@ page import="java.util.ArrayList" %>
 <html>
 <head>
-    <title>Carrera Management Application</title>
+    <title>Lista</title>
 </head>
 <body>
     <header>
         <nav>
             <div>
-                <a href="<%=request.getContextPath()%>/list">Carrera Management App</a>
+                <a href="<%=request.getContextPath()%>/list">Home</a>
             </div>
             <ul>
                 <li><a href="<%=request.getContextPath()%>/list">Carreras</a></li>
