@@ -9,7 +9,7 @@
     <header>
         <nav>
             <div>
-                <a href="<%=request.getContextPath()%>/list">Home</a>
+                <a href="<%=request.getContextPath()%>">Home</a>
             </div>
             <ul>
                 <li><a href="<%=request.getContextPath()%>/list">Carreras</a></li>
