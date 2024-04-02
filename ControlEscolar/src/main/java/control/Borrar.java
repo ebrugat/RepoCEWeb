@@ -89,7 +89,7 @@ public class Borrar extends HttpServlet {
             throws ServletException, IOException {
         try {
         CarreraDao.deleteData(id);
-        response.sendRedirect("list");
+        response.sendRedirect("listar");
        }catch (ClassNotFoundException ex) {
         Logger.getLogger(Borrar.class.getName()).log(Level.SEVERE, null, ex);
      }

@@ -71,7 +71,7 @@ public class Crear extends HttpServlet {
         String nombre = request.getParameter("nombre");
         Carrera nuevaCarrera = new Carrera(nombre);
         carreraDao.insertData(nuevaCarrera.getNombre());
-        response.sendRedirect("list");
+        response.sendRedirect("listar");
     }
     /**
      * Returns a short description of the servlet.
