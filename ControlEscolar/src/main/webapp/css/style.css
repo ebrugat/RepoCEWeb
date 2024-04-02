@@ -1,6 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+
 a{
     text-decoration: none;
 }
 
-body{
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
 }

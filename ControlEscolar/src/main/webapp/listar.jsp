@@ -19,7 +19,7 @@
             </nav>
         </header>
         <br>
-        <div>
+        <div class="centrar">
             <div>
                 <h3>Lista de Carreras</h3>
                 <hr>
