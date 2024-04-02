@@ -22,7 +22,7 @@ import model.Carrera;
  *
  * @author Enric
  */
-@WebServlet(name = "lista", urlPatterns = {"/"})
+@WebServlet(name = "listar", urlPatterns = {"/listar"})
 public class Listar extends HttpServlet {
     private CarreraDao carreraDao;
     private Carrera car;
@@ -65,7 +65,7 @@ public class Listar extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException{
             ArrayList<Carrera> carreras = carreraDao.readData();
             request.setAttribute("carreras", carreras);
-            RequestDispatcher rp = request.getRequestDispatcher("carreras-lista.jsp");
+            RequestDispatcher rp = request.getRequestDispatcher("listar.jsp");
             rp.forward(request,response);
     }
 }

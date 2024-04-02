@@ -7,13 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Borrar carrera</title>
-</head>
-<body>
-    <form action="./borrar" method="post">
-        <input type="submit" name="submit" value="Confirmar"/>
-        <input type="submit" name="submit" value="Cancelar"/>
-    </form>
-</body>
+    <head>
+        <title>Borrar carrera</title>
+    </head>
+    <body>
+        <form action="./borrar" method="post">
+            <input type="submit" name="submit" value="Confirmar"/>
+            <input type="submit" name="submit" value="Cancelar"/>
+        </form>
+    </body>
 </html>
