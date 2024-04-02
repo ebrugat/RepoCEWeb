@@ -14,7 +14,7 @@ public final class DbConnect {
     public static final String HOST = "localhost";
     public static final String BD_NAME = "bd_institucion?autoReconnect=true&useSSL=false";
     public static final String USER = "root";
-    public static final String PASSWORD = "123456";
+    public static final String PASSWORD = "root";
     public static String BD_URL;
     private Connection conexion;
     
